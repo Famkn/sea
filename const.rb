@@ -7,7 +7,14 @@ module Const
     MENU3 = {"kopi" => 1000, "indomie" => 3000, "pempek" => 5000, "batagor" => 8000}
     MENU = [MENU1, MENU2, MENU3]
 
-    # RESTONAME ascii
-    RESTO_NAME = 65
+    # DRIVERNAME ascii
+    DRIVER_NAME = 65
+
+    # MAXIMUM NUMBER
+    FIXNUM_MAX = (2**(0.size * 8 -2) -1)
+
+    # MINIMUM NUMBER
+    FIXNUM_MIN = -(2**(0.size * 8 -2))
+
 
 end

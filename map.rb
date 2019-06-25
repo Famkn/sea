@@ -28,10 +28,10 @@ class Map
         raise "#{obj.class} position is out of bound" if Tool.out_of_bound?(object.position, @size)
         if object.is_a?(Driver)
             @drivers << object
-            @grid[object.position.y][object.position.x] = object.name.to_s
+            @grid[object.position.y][object.position.x] = object.name
         elsif object.is_a?(Store)
             @stores << object
-            @grid[object.position.y][object.position.x] = object.name.to_s
+            @grid[object.position.y][object.position.x] = object.name
         elsif object.is_a?(User)
             @user = object
             @grid[object.position.y][object.position.x] = "U"

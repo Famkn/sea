@@ -1,4 +1,3 @@
-
 class User
     attr_accessor :position
     def initialize(posx, posy)
