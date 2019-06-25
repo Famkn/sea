@@ -1,22 +1,23 @@
 require_relative "tool"
-require_relative "driver"
-require_relative "store"
-require_relative "user"
+# require_relative "driver"
+# require_relative "store"
+# require_relative "user"
 
 class Map
+    attr_accessor :size, :drivers, :stores, :user, :grid
     def initialize(size = 20)
         @size = size
         @drivers = []
         @stores = []
-        @user = user
-        @grid = grid
+        @user = nil
+        @grid = Array.new(size) { Array.new(size,".") }
     end
 
 
-    def print_map()
-        for i in 0...size do
-            for j in 0...size do
-                print @grid[i][j] + ""
+    def print_map
+        for i in 0...size
+            for j in 0...size
+                print @grid[i][j] + " "
             end
             print "\n"
         end
@@ -25,15 +26,13 @@ class Map
 
     def insert(object)
         raise "#{obj.class} position is out of bound" if Tool.out_of_bound?(object.position, @size)
-        if object.is_a?(Driver) do
+        if object.is_a?(Driver)
             @drivers << object
-            @grid[object.position.y][object.position.x] = object.name
-        
-        elsif object.is_a?(Store) do
+            @grid[object.position.y][object.position.x] = object.name.to_s
+        elsif object.is_a?(Store)
             @stores << object
-            @grid[object.position.y][object.position.x] = object.name
-        
-        elsif object.is_a?(User) do
+            @grid[object.position.y][object.position.x] = object.name.to_s
+        elsif object.is_a?(User)
             @user = object
             @grid[object.position.y][object.position.x] = "U"
         else

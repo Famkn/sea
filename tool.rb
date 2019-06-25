@@ -1,14 +1,15 @@
 module Tool
     extend self
     # attr_accessor :MENU1
-    MENU1 = "dict" 
+    # MENU1 = "dict" 
     # def out?(pos_x, pos_y, obj, size)
     #     raise "#{obj.class} position is out of bound" if outp(pos_x, size) || outp(pos_y, size) 
     # end
 
-    # def out_of_bound?(pos)
-
-    # end
+    # out_of_bound?(object.position, @size)
+    def out_of_bound?(pos, size)
+        out?(pos.x, size) || out?(pos.y, size)
+    end
 
     def out?(pos, size)
         # puts "pos #{pos}, size #{size}"

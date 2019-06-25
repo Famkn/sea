@@ -1,5 +1,5 @@
 class Store
-    attr_accessor :menu, :name
+    attr_accessor :position, :name, :menu 
 
     def initialize(posx, posy, name, menu)
         @position = Struct.new(:x, :y).new(posx, posy)
