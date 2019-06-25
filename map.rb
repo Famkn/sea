@@ -41,6 +41,10 @@ class Map
 
     end
 
+    def drivers_empty?
+        @drivers.length == 0
+    end
+
 
 end
 
