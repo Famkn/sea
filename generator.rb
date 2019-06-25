@@ -14,9 +14,9 @@ module Generator
     end
 
     def generate_drivers(map)
-        for i in 1..5 do
+        for i in 0...5 do
             posx, posy = generate_position(map.size)
-            driver = Driver.new(posx, posy, (Const::DRIVER_NAME + i).chr, 0, true)
+            driver = Driver.new(posx, posy, (Const::DRIVER_NAME + i).chr)
             map.insert(driver)
         end
     end
