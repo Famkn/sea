@@ -1,11 +1,9 @@
-require_relative "const"
-
-
 module Finder
     extend self
 
-    def find_driver(drivers, store)
-        nearest_cost = Const::FIXNUM_MAX
+    def find_driver(drivers, store, max_integer)
+        # nearest_cost = Const::FIXNUM_MAX
+        nearest_cost = max_integer
         nearest_driver = nil
         for driver in drivers 
             deltax = driver.position.x - store.position.x

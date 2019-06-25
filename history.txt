@@ -1,0 +1,23 @@
+driver_name:
+D
+route:
+Driver is on the way to store. start at (7,3)
+go to (7,2)
+go to (6,2), driver arrived at the store
+driver has bought the item(s), start at (6,2)
+go to (6,3)
+go to (6,4)
+go to (6,5)
+go to (6,6)
+go to (6,7)
+go to (5,7)
+go to (4,7)
+go to (3,7)
+go to (2,7)
+go to (1,7), driver arrived at your place!
+store_name:
+2
+ordered_menu:
+pempek: 100 pcs 
+total_cost:
+1700
