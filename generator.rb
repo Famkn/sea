@@ -1,4 +1,3 @@
-require_relative "map"
 require_relative "const"
 require_relative "tool"
 require_relative "driver"
@@ -32,7 +31,7 @@ module Generator
 
     def generate_user(map)
         posx, posy = generate_position(map.size)
-        user = User.new(posx, posy)
+        user = User.new(posx, posy, Const::USER_NAME)
         map.insert(user)
     end
     
@@ -66,6 +65,5 @@ module Generator
             src.y -= 1
             generate_path(src, dest, path_result)
         end
-        
     end
 end

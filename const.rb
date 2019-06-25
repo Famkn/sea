@@ -2,9 +2,9 @@ module Const
     extend self
 
     # MENU
-    MENU1 = {"ayam goreng" => 15000, "nasi goreng" => 10000, "seblak" => 10000, "seafood" => 25000}
-    MENU2 = {"pasta" => 40000, "pizza" => 70000, "burger" => 20000}
-    MENU3 = {"kopi" => 1000, "indomie" => 3000, "pempek" => 5000, "batagor" => 8000}
+    MENU1 = {"ayam goreng" => 15, "nasi goreng" => 10, "seblak" => 10, "seafood" => 25}
+    MENU2 = {"pasta" => 40, "pizza" => 70, "burger" => 20}
+    MENU3 = {"kopi" => 1, "indomie" => 3, "pempek" => 5, "batagor" => 8}
     MENU = [MENU1, MENU2, MENU3]
 
     # DRIVERNAME ascii
@@ -16,5 +16,13 @@ module Const
     # MINIMUM NUMBER
     FIXNUM_MIN = -(2**(0.size * 8 -2))
 
+    # COST OF UNIT
+    UNITCOST = 100
 
+    # RATING
+    MINIMUM_RATING = 1
+    MAXIMUM_RATING = 5
+
+    #USER NAME
+    USER_NAME = "U" 
 end

@@ -26,18 +26,30 @@ class Map
 
     def insert(object)
         raise "#{obj.class} position is out of bound" if Tool.out_of_bound?(object.position, @size)
-        if object.is_a?(Driver)
-            @drivers << object
-            @grid[object.position.y][object.position.x] = object.name
-        elsif object.is_a?(Store)
-            @stores << object
-            @grid[object.position.y][object.position.x] = object.name
-        elsif object.is_a?(User)
-            @user = object
-            @grid[object.position.y][object.position.x] = "U"
-        else
+        if !object.is_a?(PointObject)
             raise "error inserting object into map. object must be driver, store, or user."
+        else
+            if object.is_a?(Driver)
+                @drivers << object
+            elsif object.is_a?(Store)    
+                @stores << object
+            else
+                @user = object
+            end
+            @grid[object.position.y][object.position.x] = object.name      
         end
+        # if object.is_a?(Driver)
+        #     @drivers << object
+        #     @grid[object.position.y][object.position.x] = object.name
+        # elsif object.is_a?(Store)
+        #     @stores << object
+        #     @grid[object.position.y][object.position.x] = object.name
+        # elsif object.is_a?(User)
+        #     @user = object
+        #     @grid[object.position.y][object.position.x] = "U"
+        # else
+        #     raise "error inserting object into map. object must be driver, store, or user."
+        # end
 
     end
 
