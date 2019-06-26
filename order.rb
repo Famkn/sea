@@ -1,6 +1,8 @@
 require_relative "map"
 require_relative "generator"
 require_relative "finder"
+require_relative "const"
+
 
 module Order
     extend self
@@ -108,7 +110,7 @@ module Order
 
         
         # # SAVE ORDER HISTORY
-        save_order_history(driver.name, route, store.name, ordered_menu, cost, Const::FILENAME)
+        save_order_history(driver.name, route, store.name, ordered_menu, cost, Const::HISTORY_FILENAME)
     end
     
 

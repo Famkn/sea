@@ -2,7 +2,6 @@ module Finder
     extend self
 
     def find_driver(drivers, store, max_integer)
-        # nearest_cost = Const::FIXNUM_MAX
         nearest_cost = max_integer
         nearest_driver = nil
         for driver in drivers 

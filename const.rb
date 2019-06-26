@@ -26,6 +26,9 @@ module Const
     #USER NAME
     USER_NAME = "U"
     
-    # FILENAME
-    FILENAME = "history.txt"
+    # HISTORY FILENAME 
+    HISTORY_FILENAME = "history.txt"
+
+    # INPUT FILENAME
+    INPUT_FILENAME = "input.txt"
 end

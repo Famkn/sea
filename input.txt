@@ -1,0 +1,27 @@
+size 20
+user 0 0  
+num_drivers 5 
+13,10,
+10,11,
+7,1,
+1,7,
+9,9,
+end_drivers
+stores 3 
+name ! 
+menu padi 5 
+menu beras 3 
+menu jagung 3 
+position 1 1 
+end_store 
+name @ 
+menu papeda 3 
+menu pisang 5 
+position 2 2 
+end_store 
+name # 
+menu roti 5 
+menu susu 8 
+position 3 3 
+end_store 
+end
