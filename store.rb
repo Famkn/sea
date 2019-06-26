@@ -4,10 +4,8 @@ class Store < PointObject
     attr_accessor :menu 
 
     def initialize(posx, posy, name, menu)
-        # @position = Struct.new(:x, :y).new(posx, posy)
-        # @name = name
         super(posx, posy, name)
-        @menu = menu #dict {"nama_menu" => "harga"}
+        @menu = menu
     end
 
     def print_menu

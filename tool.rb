@@ -22,22 +22,14 @@ module Tool
         # replace all driver with "."
         # puts "replace all driver with ."
         
-        map.drivers.each do |driver|
-            # puts "driver:#{driver.name}. position: #{driver.position.y},#{driver.position.x}. rating: #{driver.rating}. first_time: #{driver.first_time}"
-            # puts "map this position: #{map.grid[driver.position.y][driver.position.x]}"
-            map.grid[driver.position.y][driver.position.x] = "."
-            # puts "after map this position: #{map.grid[driver.position.y][driver.position.x]}"
-        end #{|driver| map.grid[driver.position.y][driver.position.x] = "."}
-        # puts "map:"
-        # map.print_map
-    
+        map.drivers.each  {|driver| map.grid[driver.position.y][driver.position.x] = "."}
+        
         # delete bad driver
         map.drivers.delete_if { |driver| !driver.first_time && driver.rating < 3.0 } 
         
         # # generate good driver only
         map.drivers.each {|good_driver| map.grid[good_driver.position.y][good_driver.position.x] = good_driver.name} 
-        # puts "generate good driver only. map:"
-        # map.print_map
+
     end
 
 

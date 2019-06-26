@@ -71,6 +71,7 @@ when 3
     size = input[0].to_i
     user_posx = input[1].to_i
     user_posy = input[2].to_i
+    p "userPos (y,x) #{user_posy},#{user_posx}"
     map = Map.new(size)
     Generator.generate_map(map, drivers_position = nil, num_drivers = nil, num_store = nil, stores = nil, user_position = Struct.new(:x, :y).new(user_posx, user_posy))
 when 1
@@ -78,7 +79,6 @@ when 1
     size, user_posx, user_posy, num_drivers, num_stores = read_input_from_text( Const::INPUT_FILENAME, drivers_pos, stores)
     map = Map.new(size)
     Generator.generate_map(map, drivers_pos, num_drivers, num_stores, stores, user_position = Struct.new(:x, :y).new(user_posx, user_posy))
-    # puts "satu"
 else
     raise "Param is not compatible"
 end

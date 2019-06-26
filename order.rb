@@ -44,20 +44,15 @@ module Order
     
         # cost from driver to store
         driver_position_x, driver_position_y = driver.position.x, driver.position.y 
-        puts "original driver position: #{driver.position.y},#{driver.position.x}"
         path_driver_to_store = []
         Generator.generate_path(driver.position, store.position, path_driver_to_store)
-        driver.position.x, driver.position.y = driver_position_x, driver_position_y 
-        puts "after generate driver position: #{driver.position.y},#{driver.position.x}"
-    
+        driver.position.x, driver.position.y = driver_position_x, driver_position_y     
         
         # cost from store to user
         store_position_x, store_position_y = store.position.x, store.position.y
-        puts "original store position: #{store.position.y},#{store.position.x}"
         path_store_to_user = []
         Generator.generate_path(store.position, map.user.position, path_store_to_user)
         store.position.x, store.position.y = store_position_x, store_position_y
-        puts "after generate store position: #{store.position.y},#{store.position.x}"
     
         # compute total cost of order 
         cost = Tool.cost_of_order(ordered_menu, store.menu, path_driver_to_store, path_store_to_user, Const::UNITCOST) 
@@ -146,7 +141,6 @@ module Order
             driver.total_trip += 1
             driver.rating = (total_point + rating) / driver.total_trip.to_f 
         end
-        puts "rating driver: #{driver.name} is now #{driver.rating}"
         
     end
 
@@ -163,14 +157,12 @@ module Order
             ordered_menu.each do |name, count|
                 line.print("#{name}: #{count} pcs ")
             end
-            # line.puts(ordered_menu)
             line.puts("\ntotal_cost:")
             line.puts(total_cost)
         end
     end
 
     def view_order_history(filename)
-        # puts "" if File.zero?(filename)
         File.open(filename, "r") do |f|
             i = 0
             f.each_line do |line|
