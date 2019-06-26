@@ -37,34 +37,72 @@ module Order
     
     
         # FINISH ORDER
+        finish_order(map, store, ordered_menu, history_file)
+
+    end
+    
+
+    def getting_order(map, ordered_menu, store)
+        menu_name, menu_sum =  STDIN.gets.chomp.split(" ")
+        menu_sum = menu_sum.to_i
+        while !store.menu.key?(menu_name) || menu_sum <= 0
+            puts "#{menu_name} not available in this store. please choose available item(s)" if !store.menu.key?(menu_name)
+            puts "#{menu_sum} is not a right sum for your order. please choose the right sum for your order" if menu_sum <= 0 
+            menu_name, menu_sum =  STDIN.gets.chomp.split(" ")
+            menu_sum = menu_sum.to_i
+        end
+        if !ordered_menu.key?(menu_name)
+            ordered_menu[menu_name] = 0
+        end
+        ordered_menu[menu_name] += menu_sum
+    end
+
+    def finish_order(map, store, ordered_menu, history_file)
+        # FINISH ORDER
+        path_driver_to_store = []
+        path_store_to_user = []
         
-        # Cost of Delivery
         # Find the nearest driver
         driver = Finder.find_driver(map.drivers, store, Const::FIXNUM_MAX)
-    
-        # cost from driver to store
-        driver_position_x, driver_position_y = driver.position.x, driver.position.y 
-        path_driver_to_store = []
-        Generator.generate_path(driver.position, store.position, path_driver_to_store)
-        driver.position.x, driver.position.y = driver_position_x, driver_position_y     
+
+        # Cost of Delivery
+        cost = cost_of_delivery(driver, store, map.user, ordered_menu, path_driver_to_store, path_store_to_user)
         
-        # cost from store to user
-        store_position_x, store_position_y = store.position.x, store.position.y
-        path_store_to_user = []
-        Generator.generate_path(store.position, map.user.position, path_store_to_user)
-        store.position.x, store.position.y = store_position_x, store_position_y
-    
-        # compute total cost of order 
-        cost = Tool.cost_of_order(ordered_menu, store.menu, path_driver_to_store, path_store_to_user, Const::UNITCOST) 
-    
         puts "Here's your menu"
         ordered_menu.each do |menu_name, menu_sum| 
            puts "#{menu_name}. #{menu_sum} pcs" 
         end
         puts "Here's the total price: #{cost}"
-    
-        route = []
+
         # PRINT THE ROUTE
+        route = []
+        print_route(path_driver_to_store, path_store_to_user, route)    
+        
+        # USER GIVE RATING TO DRIVER
+    
+        give_rating(map, driver)
+
+        # # SAVE ORDER HISTORY
+        save_order_history(driver.name, route, store.name, ordered_menu, cost, history_file)
+
+        # return driver for rating and cost for saving history
+        # return driver, cost
+    end
+
+    def cost_of_delivery(driver, store, user, ordered_menu, path_driver_to_store, path_store_to_user)
+        # cost from driver to store
+        cost_driver_to_store(driver, store, path_driver_to_store)
+
+        # cost from store to user
+        cost_store_to_user(store, user, path_store_to_user)
+        
+        # compute total cost of order 
+        cost = Tool.cost_of_order(ordered_menu, store.menu, path_driver_to_store, path_store_to_user, Const::UNITCOST)
+        cost 
+    
+    end
+
+    def print_route(path_driver_to_store, path_store_to_user, route)
     
         # ROUTE FROM DRIVER TO STORE
     
@@ -72,10 +110,8 @@ module Order
         for i in 0...length_driver_to_store
             if i == 0
                 temp = "Driver is on the way to store. start at (#{path_driver_to_store[i].y},#{path_driver_to_store[i].x})" 
-                # puts temp
             elsif i == length_driver_to_store-1  
                 temp = "go to (#{path_driver_to_store[i].y},#{path_driver_to_store[i].x}), driver arrived at the store"
-                # puts temp
             else
                 temp = "go to (#{path_driver_to_store[i].y},#{path_driver_to_store[i].x})"
             end
@@ -97,33 +133,24 @@ module Order
             puts temp
             route << temp
         end
-    
-        
-        # USER GIVE RATING TO DRIVER
-    
-        give_rating(map, driver)
-
-        
-        # # SAVE ORDER HISTORY
-        save_order_history(driver.name, route, store.name, ordered_menu, cost, history_file)
     end
     
-
-    def getting_order(map, ordered_menu, store)
-        menu_name, menu_sum =  STDIN.gets.chomp.split(" ")
-        menu_sum = menu_sum.to_i
-        while !store.menu.key?(menu_name) || menu_sum <= 0
-            puts "#{menu_name} not available in this store. please choose available item(s)" if !store.menu.key?(menu_name)
-            puts "#{menu_sum} is not a right sum for your order. please choose the right sum for your order" if menu_sum <= 0 
-            menu_name, menu_sum =  STDIN.gets.chomp.split(" ")
-            menu_sum = menu_sum.to_i
-        end
-        if !ordered_menu.key?(menu_name)
-            ordered_menu[menu_name] = 0
-        end
-        ordered_menu[menu_name] += menu_sum
+    def cost_driver_to_store(driver, store, path_driver_to_store)
+        driver_position_x, driver_position_y = driver.position.x, driver.position.y 
+        cost_a_to_b(driver, store, path_driver_to_store)
+        driver.position.x, driver.position.y = driver_position_x, driver_position_y     
     end
-    
+
+    def cost_store_to_user(store, user, path_store_to_user)
+        store_position_x, store_position_y = store.position.x, store.position.y
+        cost_a_to_b(store, user, path_store_to_user)
+        store.position.x, store.position.y = store_position_x, store_position_y
+    end
+
+    def cost_a_to_b(a, b, path_a_to_b)
+        Generator.generate_path(a.position, b.position, path_a_to_b)
+    end
+
     def give_rating(map, driver)
         puts "please, give the driver a rating (#{Const::MINIMUM_RATING} to #{Const::MAXIMUM_RATING})"
         rating = STDIN.gets.chomp.to_i
@@ -180,3 +207,4 @@ module Order
 
 end
 
+ 

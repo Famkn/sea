@@ -16,7 +16,7 @@ Module Tool, Finder, Generator, and Const
 PointObj is parent class for Driver, Store, and User. because they all have position and name.
 User class is basically PointObj class without any field or method added. it is used only for semantic (User) and probability of Open for Extension if there will be any changes in the future.
 Map class is where all the business logic is implemented.
-Order class is for order functionality.
+Order class is for order functionality (order and view history order).
 
 Tool Module is toolwork for basic functionality other class to avoid DRY, in this case for POSITION related (out_of_bound?,out?, and position_same?), for Cost related (cost_of_order), and for rating related (rating_out?).
 
