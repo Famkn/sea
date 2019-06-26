@@ -7,7 +7,7 @@ require_relative "const"
 module Order
     extend self
     
-    def order_food(map)
+    def order_food(map, history_file)
         stores_length = map.stores.length 
         puts "We have #{stores_length} stores"
         for i in 0...stores_length
@@ -105,7 +105,7 @@ module Order
 
         
         # # SAVE ORDER HISTORY
-        save_order_history(driver.name, route, store.name, ordered_menu, cost, Const::HISTORY_FILENAME)
+        save_order_history(driver.name, route, store.name, ordered_menu, cost, history_file)
     end
     
 

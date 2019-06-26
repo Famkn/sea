@@ -31,4 +31,7 @@ module Const
 
     # INPUT FILENAME
     INPUT_FILENAME = "input.txt"
+
+    # PATH
+    DATA_PATH = "data/"
 end

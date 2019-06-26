@@ -1,8 +1,8 @@
-require_relative "map"
-require_relative "generator"
-require_relative "tool"
-require_relative "const"
-require_relative "order"
+require_relative "src/map"
+require_relative "src/generator"
+require_relative "src/tool"
+require_relative "src/const"
+require_relative "src/order"
 
 def show_main_menu
     puts "\nMain Menu"
@@ -60,7 +60,6 @@ end
 
 # Global Variable
 map = nil
-
 input = ARGV
 
 case input.length
@@ -71,12 +70,11 @@ when 3
     size = input[0].to_i
     user_posx = input[1].to_i
     user_posy = input[2].to_i
-    p "userPos (y,x) #{user_posy},#{user_posx}"
     map = Map.new(size)
     Generator.generate_map(map, drivers_position = nil, num_drivers = nil, num_store = nil, stores = nil, user_position = Struct.new(:x, :y).new(user_posx, user_posy))
 when 1
     drivers_pos = []; stores = []
-    size, user_posx, user_posy, num_drivers, num_stores = read_input_from_text( Const::INPUT_FILENAME, drivers_pos, stores)
+    size, user_posx, user_posy, num_drivers, num_stores = read_input_from_text( Const::DATA_PATH + Const::INPUT_FILENAME, drivers_pos, stores)
     map = Map.new(size)
     Generator.generate_map(map, drivers_pos, num_drivers, num_stores, stores, user_position = Struct.new(:x, :y).new(user_posx, user_posy))
 else
@@ -99,12 +97,12 @@ while true
             Generator.generate_drivers(map)
         end
 
-        Order.order_food(map)
+        Order.order_food(map, Const::DATA_PATH + Const::HISTORY_FILENAME)
         
         # DELETE BAD DRIVER
         map.delete_driver
     
     when 3
-        Order.view_order_history(Const::HISTORY_FILENAME)
+        Order.view_order_history(Const::DATA_PATH + Const::HISTORY_FILENAME)
     end
 end
