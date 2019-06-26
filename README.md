@@ -1,4 +1,7 @@
-### SEA
+### SOFTWARE ENGINEERING ACADEMY
+### COMPFEST - GOJEK
+### SECOND STAGE ASSIGNMENT
+
 #### Assumptions
 1. Axis increasing left to right. Ordinate increasing up to down
 2. Driver, Store, and User doesnt block path between driver to store or store to driver
