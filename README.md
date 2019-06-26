@@ -8,18 +8,19 @@
 3. View History is read from file that is saved when finishing order
 
 #### Design Decision
-There are one main program, 6 classes, and 4 modules.
+There are one main program, 5 classes, and 5 modules.
 
-Classes: PointObj, Driver, Store, User, Map, and Order.
+Classes: PointObj, Driver, Store, User, and Map.
 
-Module Tool, Finder, Generator, and Const
+Module Order, Tool, Finder, Generator, and Const
 
 PointObj is parent class for Driver, Store, and User. I use inheritance to reuse code because they all have position and name.
 User class is basically PointObj class without any field or method added. it is used only for semantic (User) for readability.
 Driver class is class that act like driver in spesification.
 Store class is class that act like store in spesification.
 Map class is class that act like map object in real life that have information of driver, store, and user. 
-Order class is where the logic for order functionality implemented. (order and view history order).
+
+Tool Order is toolwork for order related functionality. this is where the logic for order functionality implemented. (order and view history order).
 
 Tool Module is toolwork for basic functionality for other class to avoid DRY, in this case for position related (out_of_bound?,out?, and position_same?), for Cost related (cost_of_order), and for rating related (rating_out?).
 
