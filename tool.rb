@@ -15,23 +15,6 @@ module Tool
         src.x == dst.x && src.y == dst.y
     end
 
-    
-    #DRIVER TOOL
-
-    def delete_driver(map)
-        # replace all driver with "."
-        # puts "replace all driver with ."
-        
-        map.drivers.each  {|driver| map.grid[driver.position.y][driver.position.x] = "."}
-        
-        # delete bad driver
-        map.drivers.delete_if { |driver| !driver.first_time && driver.rating < 3.0 } 
-        
-        # # generate good driver only
-        map.drivers.each {|good_driver| map.grid[good_driver.position.y][good_driver.position.x] = good_driver.name} 
-
-    end
-
 
     #COST TOOL
 

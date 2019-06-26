@@ -102,7 +102,7 @@ while true
         Order.order_food(map)
         
         # DELETE BAD DRIVER
-        Tool.delete_driver(map)
+        map.delete_driver
     
     when 3
         Order.view_order_history(Const::HISTORY_FILENAME)
